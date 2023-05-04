@@ -38,7 +38,7 @@ const Promotion = () => {
           >
             {promotions?.map((item) => (
               <SwiperSlide>
-                <img src={item.url} className="w-full h-[25rem] object-cover" />
+                <img src={item.url} className="w-full h-[15rem] xl:h-[25rem] object-cover" />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -55,12 +55,49 @@ const Promotion = () => {
           >
             {posters?.map((item) => (
               <SwiperSlide>
-                <img src={item.url} className="w-full h-[25rem] object-cover" />
+                <img src={item.url} className="w-full h-[15rem] xl:h-[25rem] object-cover" />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       )}
+      <div className="flex  divide-x divide-black/30 border border-black/20 py-4 px-8 justify-evenly mx-6 xl:mx-10">
+        <div className="flex items-center px-2 xl:px-4">
+          <i class="uil uil-rocket text-[#fcb800] text-3xl xl:text-5xl mr-4"></i>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm xl:base">Free Delivery</span>
+            <span className="text-xs xl:text-sm">For all orders over $99</span>
+          </div>
+        </div>
+        <div className="flex items-center px-2 xl:px-4">
+          <i class="uil uil-redo text-[#fcb800] text-3xl xl:text-5xl mr-4"></i>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm xl:base">90 Days return</span>
+            <span className="text-xs xl:text-sm">If good have problem</span>
+          </div>
+        </div>
+        <div className="flex items-center px-2 xl:px-4">
+          <i class="uil uil-credit-card text-[#fcb800] text-3xl xl:text-5xl mr-4"></i>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm xl:base">Secure Payment</span>
+            <span className="text-xs xl:text-sm">100% secure payment</span>
+          </div>
+        </div>
+        <div className="flex items-center px-2 xl:px-4">
+          <i class="uil uil-hipchat text-[#fcb800] text-3xl xl:text-5xl mr-4"></i>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm xl:base">24/7 Support</span>
+            <span className="text-xs xl:text-sm">Dedicated support</span>
+          </div>
+        </div>
+        <div className="flex items-center px-2 xl:px-4">
+          <i class="uil uil-gift text-[#fcb800] text-3xl xl:text-5xl mr-4"></i>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm xl:base">Gift Service</span>
+            <span className="text-xs xl:text-sm">Support gift service</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
