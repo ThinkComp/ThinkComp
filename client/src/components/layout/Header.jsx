@@ -1,7 +1,7 @@
 import React from "react";
-import Logo from "../assets/logo.png";
+import Logo from "../../assets/logo.png";
 
-const Header = () => {
+const Header = ({ toggleModal }) => {
   return (
     <div className="bg-[#fcb800] divide-y divide-black/30">
       <div className="flex items-center justify-between px-5 xl:px-12 py-5">
@@ -30,7 +30,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2">
             <i class="uil uil-user"></i>
-            <div className="flex flex-col text-sm font-extrabold">
+            <div className="flex flex-col text-sm font-extrabold cursor-pointer" onClick={() => toggleModal(true)}>
               <span>Login</span>
               <span>Register</span>
             </div>
