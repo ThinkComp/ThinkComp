@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 import axios from "axios";
+import { useQuery } from "react-query";
 
 const Promotion = () => {
   const [promotions, setPromotions] = useState(null);
@@ -10,20 +11,24 @@ const Promotion = () => {
 
   /* This function fetches data from the "/banner" endpoint using axios and sets the promotions and
      posters state variables with the response data. */
-  const fetchBanners = async () => {
-    await axios.get("/banner").then((res) => {
-      setPromotions(res.data.promotions);
-      setPosters(res.data.posters);
-    });
-  };
+  // const fetchBanners = async () => {
+  //   await axios.get("/banner").then((res) => {
+  //     setPromotions(res.data.promotions);
+  //     setPosters(res.data.posters);
+  //   });
+  // };
+
+  const { isLoading, data } = useQuery("fetch-banners", async () => {
+    return await axios.get("/banner");
+  });
 
   useEffect(() => {
-    fetchBanners();
+    // fetchBanners();
   }, []);
 
   return (
     <>
-      {promotions && posters && (
+      {!isLoading && (
         <div className="flex">
           <Swiper
             spaceBetween={30}
@@ -36,7 +41,7 @@ const Promotion = () => {
             className="mySwiper w-full h-full"
             style={{ margin: "2rem", flex: "0.7" }}
           >
-            {promotions?.map((item) => (
+            {data?.data.promotions?.map((item) => (
               <SwiperSlide>
                 <img src={item.url} className="w-full h-[15rem] xl:h-[25rem] object-cover" />
               </SwiperSlide>
@@ -53,7 +58,7 @@ const Promotion = () => {
             modules={[Autoplay]}
             className="mySwiper"
           >
-            {posters?.map((item) => (
+            {data?.data.posters?.map((item) => (
               <SwiperSlide>
                 <img src={item.url} className="w-full h-[15rem] xl:h-[25rem] object-cover" />
               </SwiperSlide>

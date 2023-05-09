@@ -11,12 +11,14 @@ import Footer from "../layout/Footer";
 const Home = () => {
   return (
     <div>
+      <Header />
       <Promotion />
       <HomeProducts />
       <Categories />
       <Services />
       <FeaturedBrands />
       <Contact />
+      <Footer />
     </div>
   );
 };

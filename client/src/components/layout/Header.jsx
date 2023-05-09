@@ -1,9 +1,15 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
+import { useDispatch } from "react-redux";
+import LoginModel from '../LoginModel'
 
-const Header = ({ toggleModal }) => {
+const Header = () => {
+  const dispatch = useDispatch();
+  const toggleModal = () => dispatch({type: "TOGGLE_LOGIN_MODAL"})
+  
   return (
     <div className="bg-[#fcb800] divide-y divide-black/30">
+      <LoginModel />
       <div className="flex items-center justify-between px-5 xl:px-12 py-5">
         <img src={Logo} className="w-[10rem] xl:w-[13rem]" />
         <div className="h-10 flex items-center w-full ml-6 xl:ml-16 mr-10">
@@ -30,7 +36,7 @@ const Header = ({ toggleModal }) => {
           </div>
           <div className="flex items-center gap-2">
             <i class="uil uil-user"></i>
-            <div className="flex flex-col text-sm font-extrabold cursor-pointer" onClick={() => toggleModal(true)}>
+            <div className="flex flex-col text-sm font-extrabold cursor-pointer" onClick={toggleModal}>
               <span>Login</span>
               <span>Register</span>
             </div>
