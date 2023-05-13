@@ -1,11 +1,15 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { modalReducer } from "./reducer/modalReducer";
+import { cartReducer } from "./reducer/cartReducer";
+import axios from "axios";
 
 const reducer = combineReducers({
-    modal: modalReducer
+    modal: modalReducer,
+    cart: cartReducer
 })
+
 
 const middleware = [thunk];
 

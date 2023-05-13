@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     pin: String,
     pinCreatedAt: Date,
     pinExpireAt: Date,
+    cart: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }]
 })
 
 module.exports = mongoose.model('User', userSchema);

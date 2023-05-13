@@ -12,7 +12,6 @@ exports.login = async (req, res) => {
         if (password != user.password) return res.status(500).json({ message: "invalid credentials" });
 
         await generateOtpAndSendMail(user);
-        generatePinAndSendSms();
 
         res.status(200).json({
             success: true
@@ -60,9 +59,11 @@ exports.verifyOtp = async (req, res) => {
 
     if (user.otpExpireAt < Date.now()) return res.status(500).json({ message: "otp has expired please generate new one." });
 
-    const validateOtp = bcrypt.compare(otp, user.otp);
+    const validateOtp = await bcrypt.compare(otp, user.otp);
 
     if (!validateOtp) return res.status(500).json({ message: "invalid otp" });
+
+    console.log("verified");
 
     user.otp = undefined;
     user.otpCreatedAt = undefined;
@@ -71,9 +72,4 @@ exports.verifyOtp = async (req, res) => {
     await user.save();
 
     res.status(200).json({ success: true });
-}
-
-const generatePinAndSendSms = async () => {
-
-    const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
 }

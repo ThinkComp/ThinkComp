@@ -1,17 +1,20 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginModel from '../LoginModel'
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const toggleModal = () => dispatch({type: "TOGGLE_LOGIN_MODAL"})
-  
+  const toggleModal = () => dispatch({ type: "TOGGLE_LOGIN_MODAL" })
+  const navigate = useNavigate();
+  const { itemCount } = useSelector(state => state.cart);
+
   return (
     <div className="bg-[#fcb800] divide-y divide-black/30">
       <LoginModel />
       <div className="flex items-center justify-between px-5 xl:px-12 py-5">
-        <img src={Logo} className="w-[10rem] xl:w-[13rem]" />
+        <img src={Logo} className="w-[10rem] xl:w-[13rem]" onClick={() => navigate("/")} />
         <div className="h-10 flex items-center w-full ml-6 xl:ml-16 mr-10">
           <select className="h-full px-6 xl:px-12 border border-r-2">
             <option selected>All</option>
@@ -30,8 +33,8 @@ const Header = () => {
             <div className="absolute bg-black rounded-full px-2 py-[3px] text-white text-xs -right-1 -bottom-1">0</div>
             <i class="uil uil-heart"></i>
           </div>
-          <div className="relative">
-            <div className="absolute bg-black rounded-full px-2 py-[3px] text-white text-xs -right-1 -bottom-1">0</div>
+          <div className="relative" onClick={() => navigate("/cart")}>
+            <div className="absolute bg-black rounded-full px-2 py-[3px] text-white text-xs -right-1 -bottom-1">{itemCount}</div>
             <i class="uil uil-shopping-bag"></i>
           </div>
           <div className="flex items-center gap-2">

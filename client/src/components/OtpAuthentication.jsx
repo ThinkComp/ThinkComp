@@ -15,9 +15,10 @@ const OtpAuthentication = () => {
     if (!otp) {
 
     } else {
-      await axios.post("/user/verify/otp", { otp, email }).then(() => {
+      await axios.post("/user/verify/otp", { otp, email }).then((res) => {
+        if (res.data.success) navigate("/");
         window.localStorage.removeItem('email');
-        navigate("/");
+
       }).catch(error => {
         alert(error.response.data.message);
       })

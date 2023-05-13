@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 import axios from "axios";
-import { useQuery } from "react-query";
 
 const Promotion = () => {
   const [promotions, setPromotions] = useState(null);
@@ -11,24 +10,23 @@ const Promotion = () => {
 
   /* This function fetches data from the "/banner" endpoint using axios and sets the promotions and
      posters state variables with the response data. */
-  // const fetchBanners = async () => {
-  //   await axios.get("/banner").then((res) => {
-  //     setPromotions(res.data.promotions);
-  //     setPosters(res.data.posters);
-  //   });
-  // };
-
-  const { isLoading, data } = useQuery("fetch-banners", async () => {
-    return await axios.get("/banner");
-  });
+  const fetchBanners = async () => {
+    await axios
+      .get("/api/v1/banner")
+      .then((res) => {
+        setPromotions(res.data.promotions);
+        setPosters(res.data.posters);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
-    // fetchBanners();
+    fetchBanners();
   }, []);
 
   return (
     <>
-      {!isLoading && (
+      {promotions && posters && (
         <div className="flex">
           <Swiper
             spaceBetween={30}
@@ -41,7 +39,7 @@ const Promotion = () => {
             className="mySwiper w-full h-full"
             style={{ margin: "2rem", flex: "0.7" }}
           >
-            {data?.data.promotions?.map((item) => (
+            {promotions?.map((item) => (
               <SwiperSlide>
                 <img src={item.url} className="w-full h-[15rem] xl:h-[25rem] object-cover" />
               </SwiperSlide>
@@ -58,7 +56,7 @@ const Promotion = () => {
             modules={[Autoplay]}
             className="mySwiper"
           >
-            {data?.data.posters?.map((item) => (
+            {posters?.map((item) => (
               <SwiperSlide>
                 <img src={item.url} className="w-full h-[15rem] xl:h-[25rem] object-cover" />
               </SwiperSlide>
@@ -66,6 +64,7 @@ const Promotion = () => {
           </Swiper>
         </div>
       )}
+
       <div className="flex  divide-x divide-black/30 border border-black/20 py-4 px-8 justify-evenly mx-6 xl:mx-10">
         <div className="flex items-center px-2 xl:px-4">
           <i class="uil uil-rocket text-[#fcb800] text-3xl xl:text-5xl mr-4"></i>
