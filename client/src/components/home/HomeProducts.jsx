@@ -7,7 +7,7 @@ const HomeProducts = () => {
 
   const fetchProducts = async () => {
     await axios
-      .get("/product/offer")
+      .get("/api/v1/product/offer")
       .then((res) => setProducts(res.data))
       .catch((error) => console.log(error));
   };

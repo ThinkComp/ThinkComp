@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
   quantity: Number,
   orignalPrice: Number,
   category: String,
+  subcategory: String,
   description: String,
   offerPrice: Number,
   isOnOffer: {
@@ -15,6 +16,7 @@ const productSchema = new mongoose.Schema({
   discount: Number,
   rating: Number,
   sold: Number,
+  weight: Number,
 });
 
 module.exports = mongoose.model("Product", productSchema);
